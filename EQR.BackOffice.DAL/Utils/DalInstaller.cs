@@ -16,7 +16,8 @@ namespace EQR.BackOffice.DAL.Utils
                 Component.For<IMongoClient>().UsingFactoryMethod(c => client).LifestyleSingleton(),
                 Component.For<IMongoDatabase>().UsingFactoryMethod(c => client.GetDatabase("local")).LifestyleSingleton(),
 
-                Component.For<IAdmissionRepository, AdmissionRepository>()
+                Component.For<IAdmissionRepository, AdmissionRepository>().LifestyleSingleton(),
+                Component.For<IVisitorsRepository, VisitorsRepository>().LifestyleSingleton()
             );
         }
     }

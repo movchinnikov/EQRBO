@@ -3,11 +3,9 @@ using System.Collections.Generic;
 
 namespace EQR.BackOffice.DataContracts.Request
 {
-    public sealed class CreateAdmissionRequest
+    public sealed class UpdateAdmissionRequest
     {
-        public string VisitorId { get; set; }
-
-        public string Description { get; set; }
+        public string AdmissionId { get; set; }
 
         public string Meeting { get; set; }
 
@@ -16,5 +14,7 @@ namespace EQR.BackOffice.DataContracts.Request
         public DateTime DateTo { get; set; }
 
         public IEnumerable<int> Floors { get; set; }
+
+        public string Description { get; set; }
     }
 }

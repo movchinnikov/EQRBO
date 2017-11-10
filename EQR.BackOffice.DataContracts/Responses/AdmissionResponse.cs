@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using EQR.BackOffice.DataContracts.Entities;
+using MongoDB.Bson.Serialization.Attributes;
 
 namespace EQR.BackOffice.DataContracts.Responses
 {
@@ -7,13 +9,15 @@ namespace EQR.BackOffice.DataContracts.Responses
     {
         public string Id { get; private set; }
 
-        public string FirstName { get; private set; }
+        public string Description { get; private set; }
 
-        public string LastName { get; private set; }
+        public string Meeting { get; private set; }
 
-        public string MiddleName { get; private set; }
-        
-        public string PhoneNumber { get; private set; }
+        public DateTime DateFrom { get; private set; }
+
+        public DateTime DateTo { get; private set; }
+
+        public IEnumerable<int> Floors { get; private set; }
 
         public AdmissionResponse(Admission entity)
         {
@@ -21,10 +25,11 @@ namespace EQR.BackOffice.DataContracts.Responses
                 throw new ArgumentNullException(nameof(entity), "Сущность не передана");
 
             Id = entity.Id.ToString();
-            FirstName = entity.FirstName;
-            LastName = entity.LastName;
-            MiddleName = entity.MiddleName;
-            PhoneNumber = entity.PhoneNumber;
+            Description = entity.Description;
+            Meeting = entity.Meeting;
+            DateFrom = entity.DateFrom;
+            DateTo = entity.DateTo;
+            Floors = entity.Floors;
         }
 
     }

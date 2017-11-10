@@ -25,6 +25,13 @@ namespace EQR.BackOffice.CQRS.Core
                 throw new NotImplementedException($"Не определен обработчик для команды {cmd.GetType()}");
 
             await handler.Execute(cmd, ctx, cancellationToken);
+
+            var afterHandlers = _container.ResolveAll<IAfterCommandHandler<TCommand>>();
+
+            foreach (var afterCommandHandler in afterHandlers)
+            {
+                await afterCommandHandler.AfterExecute(cmd, ctx, cancellationToken);
+            }
         }
 
         public async Task<TResult> ExecuteQuery<TQuery, TResult>(TQuery query, CqrsContext ctx, CancellationToken cancellationToken = new CancellationToken())

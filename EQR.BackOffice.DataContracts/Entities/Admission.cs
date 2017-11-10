@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using EQR.BackOffice.DataContracts.Cqrs;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
@@ -7,19 +8,25 @@ namespace EQR.BackOffice.DataContracts.Entities
 {
     public sealed class Admission
     {
-        public ObjectId Id { get; set; }
+        public ObjectId Id { get; private set; }
 
-        [BsonRequired, BsonElement("first_name")]
-        public string FirstName { get; set; }
+        [BsonElement("description")]
+        public string Description { get; private set; }
 
-        [BsonRequired, BsonElement("last_name")]
-        public string LastName { get; set; }
+        [BsonRequired, BsonElement("meeting")]
+        public string Meeting { get; private set; }
 
-        [BsonElement("middle_name")]
-        public string MiddleName { get; set; }
+        [BsonRequired, BsonElement("date_from")]
+        public DateTime DateFrom { get; private set; }
 
-        [BsonRequired, BsonElement("phone_number")]
-        public string PhoneNumber { get; set; }
+        [BsonRequired, BsonElement("date_to")]
+        public DateTime DateTo { get; private set; }
+
+        [BsonRequired, BsonElement("floors")]
+        public IEnumerable<int> Floors { get; private set; }
+
+        [BsonIgnore]
+        public ObjectId VisitorId { get; private set; }
 
         public Admission(CreateAdmissionCommand cmd)
         {
@@ -27,10 +34,26 @@ namespace EQR.BackOffice.DataContracts.Entities
                 throw new ArgumentNullException(nameof(cmd), "Команда не передана");
 
             Id = new ObjectId(cmd.Id);
-            FirstName = cmd.FirstName;
-            LastName = cmd.LastName;
-            MiddleName = cmd.MiddleName;
-            PhoneNumber = cmd.PhoneNumber;
+            Description = cmd.Description;
+            Meeting = cmd.Meeting;
+            DateFrom = cmd.DateFrom;
+            DateTo = cmd.DateTo;
+            Floors = cmd.Floors;
+            VisitorId = new ObjectId(cmd.VisitorId);
+        }
+
+        public Admission(UpdateAdmissionCommand cmd)
+        {
+            if (cmd == null)
+                throw new ArgumentNullException(nameof(cmd), "Команда не передана");
+
+            Id = new ObjectId(cmd.AdmissionId);
+            Description = cmd.Description;
+            Meeting = cmd.Meeting;
+            DateFrom = cmd.DateFrom;
+            DateTo = cmd.DateTo;
+            Floors = cmd.Floors;
+            VisitorId = new ObjectId(cmd.VisitorId);
         }
     }
 }
