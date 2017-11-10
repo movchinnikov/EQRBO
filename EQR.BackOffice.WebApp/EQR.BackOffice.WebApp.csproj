@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Castle.FactorySupportFacility" Version="4.1.0" />
+    <PackageReference Include="Castle.Windsor.MsDependencyInjection" Version="3.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\EQR.BackOffice.Bll\EQR.BackOffice.Bll.csproj" />
+    <ProjectReference Include="..\EQR.BackOffice.DAL\EQR.BackOffice.DAL.csproj" />
+    <ProjectReference Include="..\EQR.BackOffice.DataContracts\EQR.BackOffice.DataContracts.csproj" />
+  </ItemGroup>
+
+</Project>
